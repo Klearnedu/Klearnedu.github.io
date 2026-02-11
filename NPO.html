@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>代表挨拶</title>
+
+<style>
+:root{
+  --bg:#ffffff;
+  --card:#ffffff;
+  --accent:#2563eb;
+  --text:#111827;
+  --sub:#6b7280;
+  --border:#e5e7eb;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,
+  "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:40px 20px;
+}
+
+.wrapper{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:48px;
+  border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+}
+
+h1{
+  font-size:30px;
+  font-weight:700;
+  margin:0 0 32px;
+  line-height:1.4;
+  text-align:center;
+}
+
+.content{
+  display:flex;
+  gap:40px;
+  align-items:flex-start;
+}
+
+.text{
+  flex:1.4;
+  font-size:16px;
+  line-height:1.9;
+}
+
+.text p{
+  margin:0 0 20px;
+}
+
+.photo{
+  flex:1;
+}
+
+.photo img{
+  width:100%;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.highlight{
+  border-left:4px solid var(--accent);
+  padding-left:16px;
+  margin:24px 0;
+  font-weight:600;
+}
+
+footer{
+  margin-top:40px;
+  font-size:14px;
+  color:var(--sub);
+  text-align:right;
+}
+
+/* スマホ対応 */
+@media(max-width:900px){
+  .content{
+    flex-direction:column;
+  }
+  .card{
+    padding:28px;
+  }
+  h1{
+    font-size:22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+  <div class="card">
+
+    <h1>
+      学校教育との相乗効果を経て<br>
+      不思議を追求することができる人材を育てていきたい
+    </h1>
+
+    <div class="content">
+
+      <div class="text">
+        <p>
+          皆様におかれましては、平素より旭川高専ならびに北海道ジュニアドクター育成塾への
+          格別のご理解とご支援を賜り、誠にありがとうございます。
+        </p>
+
+        <p>
+          旭川高専では、JSTの委託を受けて2019年度より北海道で初めてとなる
+          ジュニアドクター育成塾を企画・運営してまいりました。
+          学校教育とは異なる切り口で子どもたちを育て、
+          科学に関する純粋な気持ちや興味関心を語ることができる環境を整えております。
+        </p>
+
+        <div class="highlight">
+          「教えすぎない」「自ら考える」「わからないことを楽しむ」
+        </div>
+
+        <p>
+          第一段階では体験型講座を通じて科学の楽しさを実感し、
+          第二段階では研究活動を通して思考力・表現力を高めました。
+          受講生は自らテーマを設定し、真摯に研究へ向き合っています。
+        </p>
+
+        <p>
+          本事業では、科学的探究心を持ち続けられる人材の育成を目指し、
+          2024年度より新たなプログラムへと進化いたしました。
+          今後も地域と連携しながら、未来を担う子どもたちの育成に尽力してまいります。
+        </p>
+
+        <footer>
+          北海道ジュニアドクター育成塾 代表
+        </footer>
+
+      </div>
+
+      <div class="photo">
+        <img src="photo.jpg" alt="代表写真">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
