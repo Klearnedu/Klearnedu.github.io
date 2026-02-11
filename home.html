@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Klearn</title>
+
+<style>
+:root{
+  --bg:#ffffff;
+  --accent:#2563eb;
+  --text:#111827;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,
+    "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* ヘッダー */
+header{
+  padding:24px;
+}
+
+/* ロゴエリア */
+.logo-area{
+  position:relative;
+  display:inline-block;
+}
+
+/* ロゴ */
+.logo{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+  font-size:16px;
+}
+
+.logo img{
+  height:40px;
+  width:auto;
+  display:block;
+}
+
+/* サイドバー */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:260px;
+  background:#f9fafb;
+  padding:120px 24px 24px;
+  box-shadow:2px 0 10px rgba(0,0,0,0.08);
+  transform:translateX(-100%);
+  transition:transform 0.3s ease;
+}
+
+.logo-area:hover .sidebar{
+  transform:translateX(0);
+}
+
+.sidebar ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.sidebar li{
+  margin-bottom:16px;
+}
+
+.sidebar a{
+  display:block;
+  font-size:18px;
+  text-decoration:none;
+  color:var(--text);
+  padding:8px 4px;
+  border-radius:8px;
+  transition:background .15s;
+}
+
+.sidebar a:hover{
+  background:rgba(37,99,235,0.08);
+  color:var(--accent);
+}
+
+/* メイン */
+main{
+  padding-top:80px;   /* ← 上に寄せる */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+/* タイトル */
+h1{
+  font-size:64px;
+  font-weight:800;
+  margin:0 0 24px;
+}
+
+.k{
+  font-size:90px;
+  font-weight:900;
+  color:var(--accent);
+}
+
+/* 理念 */
+.philosophy{
+  max-width:700px;
+  font-size:20px;
+  line-height:1.8;
+  color:#374151;
+  margin-bottom:60px;
+  font-weight: bold;
+}
+
+/* メニュー */
+ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+li{
+  margin:20px 0;
+}
+
+a.menu-link{
+  font-size:28px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--accent);
+  padding:8px 16px;
+  border-radius:10px;
+  transition:background .15s;
+}
+
+a.menu-link:hover{
+  background:rgba(37,99,235,0.08);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-area">
+    <a href="index.html" class="logo">
+      <img src="ロゴ案.png" alt="ロゴ">
+      <span>Klearn</span>
+    </a>
+
+    <nav class="sidebar">
+      <ul>
+        <li><a href="bkanji.html">このNPOについて</a></li>
+        <li><a href="index.html">パスワードを打つ</a></li>
+        <li><a href="tasks.html">課題一覧</a></li>
+        <li><a href="books.html">教科書を検索する</a></li>
+        <li><a href="bmath.html">web教科書：数学</a></li>
+        <li><a href="bsocial.html">web教科書：社会</a></li>
+        <li><a href="bkanji.html">web教科書：漢字</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>
+    <span class="k">K</span>learn
+  </h1>
+
+  <!-- 理念 -->
+  <p class="philosophy">
+    学びをもっと自由に、もっと直感的に。<br>
+    Klearnは、必要な知識へ最短距離でたどり着ける環境をつくります。
+  </p>
+
+  <ul>
+    <li>
+      <a class="menu-link" href="tasks.html">
+        ・今でている課題一覧
+      </a>
+    </li>
+    <li>
+      <a class="menu-link" href="books.html">
+        ・教科書リストの検索
+      </a>
+    </li>
+  </ul>
+</main>
+
+</body>
+</html>
+
+
+
