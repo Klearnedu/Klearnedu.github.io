@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>代表挨拶</title>
+<title>代表挨拶 | Klearn</title>
 
 <style>
 :root{
@@ -24,12 +24,88 @@ body{
   "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
   background:var(--bg);
   color:var(--text);
-  padding:40px 20px;
 }
+
+/* =========================
+   ヘッダー & サイドバー
+========================= */
+
+header{
+  padding:24px;
+}
+
+.logo-area{
+  position:relative;
+  display:inline-block;
+}
+
+.logo{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+  font-size:16px;
+}
+
+.logo img{
+  height:40px;
+  width:auto;
+  display:block;
+}
+
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:260px;
+  background:#f9fafb;
+  padding:120px 24px 24px;
+  box-shadow:2px 0 10px rgba(0,0,0,0.08);
+  transform:translateX(-100%);
+  transition:transform 0.3s ease;
+  z-index:1000;
+}
+
+.logo-area:hover .sidebar{
+  transform:translateX(0);
+}
+
+.sidebar ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.sidebar li{
+  margin-bottom:16px;
+}
+
+.sidebar a{
+  display:block;
+  font-size:18px;
+  text-decoration:none;
+  color:var(--text);
+  padding:8px 4px;
+  border-radius:8px;
+  transition:background .15s;
+}
+
+.sidebar a:hover{
+  background:rgba(37,99,235,0.08);
+  color:var(--accent);
+}
+
+/* =========================
+   メインコンテンツ
+========================= */
 
 .wrapper{
   max-width:1100px;
-  margin:0 auto;
+  margin:60px auto 80px;
+  padding:0 20px;
 }
 
 .card{
@@ -88,7 +164,10 @@ footer{
   text-align:right;
 }
 
-/* スマホ対応 */
+/* =========================
+   スマホ対応
+========================= */
+
 @media(max-width:900px){
   .content{
     flex-direction:column;
@@ -105,6 +184,27 @@ footer{
 
 <body>
 
+<header>
+  <div class="logo-area">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Klearnロゴ">
+      <span>Klearn</span>
+    </a>
+
+    <nav class="sidebar">
+      <ul>
+        <li><a href="NPO.html">このNPOについて</a></li>
+        <li><a href="index.html">パスワードを打つ</a></li>
+        <li><a href="tasks.html">課題一覧</a></li>
+        <li><a href="books.html">教科書を検索する</a></li>
+        <li><a href="bmath.html">web教科書：数学</a></li>
+        <li><a href="bsocial.html">web教科書：社会</a></li>
+        <li><a href="bkanji.html">web教科書：漢字</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 <div class="wrapper">
   <div class="card">
 
@@ -116,34 +216,23 @@ footer{
     <div class="content">
 
       <div class="text">
-        <p>
-          第一段落
-        </p>
-
-        <p>
-          第二段落
-        </p>
+        <p>第一段落</p>
+        <p>第二段落</p>
 
         <div class="highlight">
           区切りの部分
         </div>
 
-        <p>
-          第一段落
-        </p>
-
-        <p>
-          第二段落
-        </p>
+        <p>第一段落</p>
+        <p>第二段落</p>
 
         <footer>
           NPO法人Klearn代表　磯
         </footer>
-
       </div>
 
       <div class="photo">
-        <img src="iso.png" alt="代表写真">
+        <img src="photo.png" alt="代表写真">
       </div>
 
     </div>
