@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>パスワード保護ページ</title>
+
+  <style>
+  :root{
+    --bg:#ffffff;
+    --card:#ffffff;
+    --accent:#2563eb;
+    --text:#111827;
+    --sub:#6b7280;
+    --danger:#dc2626;
+    --border:#e5e7eb;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,
+      "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .message.error{
+    color:#dc2626;
+  }
+
+  .message.success{
+    color:#16a34a;
+  }
+
+  .card{
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    border-radius:14px;
+    padding:28px;
+    border:1px solid var(--border);
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  h1{
+    margin:0 0 8px;
+    font-size:20px;
+    font-weight:700;
+  }
+
+  p.lead{
+    margin:0 0 18px;
+    color:var(--sub);
+    font-size:14px;
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  input[type="password"]{
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--text);
+    font-size:15px;
+    outline:none;
+    transition:border-color .15s, box-shadow .15s, transform .12s;
+  }
+
+  input[type="password"]:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+    transform:translateY(-1px);
+  }
+
+  .actions{
+    display:flex;
+    align-items:center;
+  }
+
+  .btn{
+    padding:10px 16px;
+    border-radius:10px;
+    background:var(--accent);
+    color:#ffffff;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    font-size:15px;
+    box-shadow:0 6px 16px rgba(37,99,235,0.25);
+  }
+
+  .btn:active{
+    transform:translateY(1px);
+  }
+
+  .message{
+    min-height:20px;
+    font-size:14px;
+    color:var(--danger);
+    display:flex;
+    align-items:center;
+    margin-left:8px;
+  }
+
+  /* 失敗時の振動 */
+  @keyframes shake {
+    10%,90%{transform:translateX(-1px)}
+    20%,80%{transform:translateX(2px)}
+    30%,50%,70%{transform:translateX(-4px)}
+    40%,60%{transform:translateX(4px)}
+  }
+
+  .shake{
+    animation:shake .36s ease;
+  }
+
+  .hint{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--sub);
+  }
+  </style>
+</head>
+
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">この先はパスワードが必要です</h1>
+    <p class="lead">パスワードを入力してください。</p>
+
+    <form id="pwForm" autocomplete="off" onsubmit="return false;">
+      <input id="pw" type="password" placeholder="パスワードを入力" required />
+
+      <div class="actions">
+        <button id="submitBtn" class="btn" type="submit">送信</button>
+        <div id="msg" class="message" aria-live="polite"></div>
+      </div>
+    </form>
+
+    <div class="hint">※テスト</div>
+  </main>
+
+  <script>
+  (() => {
+    const PASSWORD = 'makoto';
+    const redirectUrl = 'https://klearn2.github.io/home';
+
+    const input = document.getElementById('pw');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submitBtn');
+
+    function showMessage(text, ok = false){
+      msg.textContent = text;
+      msg.classList.remove('success', 'error');
+      msg.classList.add(ok ? 'success' : 'error');
+    }
+
+    function wrong(){
+      showMessage('パスワードが違います');
+      input.classList.remove('shake');
+      void input.offsetWidth;
+      input.classList.add('shake');
+      input.value = '';
+      input.focus();
+    }
+
+    function correct(){
+      showMessage('認証に成功しました。移動します…', true);
+      setTimeout(() => {
+        location.href = redirectUrl;
+      }, 500);
+    }
+
+    function tryPassword(){
+      const val = input.value.trim();
+      if(!val){
+        showMessage('パスワードを入力してください');
+        return;
+      }
+      val === PASSWORD ? correct() : wrong();
+    }
+
+    btn.addEventListener('click', tryPassword);
+    input.addEventListener('keydown', e => {
+      if(e.key === 'Enter') tryPassword();
+    });
+
+    input.focus();
+  })();
+  </script>
+</body>
+</html>
