@@ -1,354 +1,420 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>教科書検索</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>教科書検索</title>
 
-    <style>
-      :root {
-        --bg: #ffffff;
-        --accent: #2563eb;
-        --text: #252526;
-      }
+  <style>
+    :root {
+      --bg: #ffffff;
+      --accent: #2563eb;
+      --text: #252526;
+    }
 
-      body {
-        font-family: system-ui, sans-serif;
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-      }
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-      header {
-        padding: 24px;
-      }
+    header {
+      padding: 24px;
+    }
 
-      .logo-area {
-        position: relative;
-        display: inline-block;
-      }
+    .logo-area {
+      position: relative;
+      display: inline-block;
+    }
 
-      .logo {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-        color: var(--text);
-        font-weight: 600;
-        font-size: 16px;
-      }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 16px;
+    }
 
-      .logo img {
-        height: 40px;
-        width: auto;
-        display: block;
-      }
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
 
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 260px;
-        background: #f9fafb;
-        padding: 120px 24px 24px;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        z-index: 1000;
-      }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 260px;
+      background: #f9fafb;
+      padding: 120px 24px 24px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
 
-      .logo-area:hover .sidebar {
-        transform: translateX(0);
-      }
+    .logo-area:hover .sidebar {
+      transform: translateX(0);
+    }
 
-      .sidebar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-      .sidebar li {
-        margin-bottom: 16px;
-      }
+    .sidebar li {
+      margin-bottom: 16px;
+    }
 
-      .sidebar a {
-        display: block;
-        font-size: 18px;
-        text-decoration: none;
-        color: var(--text);
-        padding: 8px 4px;
-        border-radius: 8px;
-        transition: background 0.15s;
-      }
+    .sidebar a {
+      display: block;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+      padding: 8px 4px;
+      border-radius: 8px;
+      transition: background .15s;
+    }
 
-      .sidebar a:hover {
-        background: rgba(37, 99, 235, 0.08);
-        color: var(--accent);
-      }
+    .sidebar a:hover {
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--accent);
+    }
 
-      .container {
-        max-width: 1500px;
-        padding: 24px;
-        margin: 0 auto;
-        text-align: center;
-      }
+    .container {
+      width: 100%;
+      max-width: 1500px;
+      padding: 24px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-      h1 {
-        font-size: 28px;
-        margin-bottom: 16px;
-      }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
 
-      .row {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 6px;
-        font-weight: bold;
-        color: var(--accent);
-      }
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: var(--accent);
+    }
 
-      input[type="search"] {
-        width: 360px;
-        max-width: 100%;
-        padding: 10px;
-      }
+    input[type="search"] {
+      width: 360px;
+      max-width: 100%;
+      padding: 10px;
+    }
 
-      button {
-        padding: 8px 14px;
-        cursor: pointer;
-      }
+    button {
+      padding: 8px 14px;
+      cursor: pointer;
+    }
 
-      .meta {
-        color: #6b7280;
-        font-size: 14px;
-        margin: 8px 0 16px;
-      }
+    .meta {
+      color: #6b7280;
+      font-size: 14px;
+      margin: 8px 0 16px;
+    }
 
+    #items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 50px;
+      justify-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
       #items {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 50px;
-        justify-items: center;
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
+        grid-template-columns: repeat(2, 1fr);
       }
+    }
 
-      @media (max-width: 900px) {
-        #items {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
+    li[hidden] {
+      display: none;
+    }
 
-      li[hidden] {
-        display: none;
-      }
+    .item {
+      color: var(--text);
+      font-size: 14px;
+      text-align: center;
+    }
 
-      .item {
-        font-size: 14px;
-        text-align: center;
-      }
+    .item img {
+      width: 274px;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 6px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
 
-      .item img {
-        width: 274px;
-        height: 240px;
-        object-fit: cover;
-        display: block;
-        margin-bottom: 6px;
-        border-radius: 16px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      }
-    </style>
-  </head>
+<body>
 
-  <body>
-    <header>
-      <div class="logo-area">
-        <a href="index.html" class="logo">
-          <img src="logo.png" alt="Klearnロゴ" />
-          <span>Klearn</span>
-        </a>
+  <header>
+    <div class="logo-area">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Klearnロゴ">
+        <span>Klearn</span>
+      </a>
 
-        <nav class="sidebar">
-          <ul>
-            <li><a href="home.html">ホーム</a></li>
-            <li><a href="NPO.html">このNPOについて</a></li>
-            <li><a href="index.html">パスワードを打つ</a></li>
-            <li><a href="tasks.html">課題一覧</a></li>
-            <li><a href="books.html">教科書を検索する</a></li>
-            <li><a href="bmath.html">web教科書：数学</a></li>
-            <li><a href="bsocial.html">web教科書：社会</a></li>
-            <li><a href="bkanji.html">web教科書：漢字</a></li>
-            <li><a herf="bkanbun.html">web教科書：漢文</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+      <nav class="sidebar">
+        <ul>
+          <li><a href="NPO.html">このNPOについて</a></li>
+          <li><a href="index.html">パスワードを打つ</a></li>
+          <li><a href="tasks.html">課題一覧</a></li>
+          <li><a href="books.html">教科書を検索する</a></li>
+          <li><a href="bmath.html">web教科書：数学</a></li>
+          <li><a href="bsocial.html">web教科書：社会</a></li>
+          <li><a href="bkanji.html">web教科書：漢字</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <div class="container">
-      <h1>検索で画像を探す</h1>
+  <div class="container">
+    <h1>検索で画像を探す</h1>
 
-      <div class="row">
-        <label for="q">自動検索</label>
-        <input
-          id="q"
-          type="search"
-          placeholder="ここに入力して検索"
-          autocomplete="off"
-        />
-        <button id="clear" type="button">クリア</button>
-      </div>
-
-      <p class="meta">
-        <span id="count"></span>
-      </p>
-
-      <ul id="items">
-        <!-- ===== li群ここから ===== -->
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,86,87"
-        >
-          <a href="images/クレアーン1.png">
-            <img src="images/クレアーン1.png" alt="" />
-          </a>
-          <span>86~87</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,88,89"
-        >
-          <a href="images/クレアーン2.png">
-            <img src="images/クレアーン2.png" alt="" />
-          </a>
-          <span>88~89</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,90,91"
-        >
-          <a href="images/クレアーン3.png">
-            <img src="images/クレアーン3.png" alt="" />
-          </a>
-          <span>90~91</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,92,93"
-        >
-          <a href="images/クレアーン4.png">
-            <img src="images/クレアーン4.png" alt="" />
-          </a>
-          <span>92~93</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,94,95"
-        >
-          <a href="images/クレアーン5.png">
-            <img src="images/クレアーン5.png" alt="" />
-          </a>
-          <span>94~95</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,96,97"
-        >
-          <a href="images/クレアーン6.png">
-            <img src="images/クレアーン6.png" alt="" />
-          </a>
-          <span>96~97</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,98,99"
-        >
-          <a href="images/クレアーン7.png">
-            <img src="images/クレアーン7.png" alt="" />
-          </a>
-          <span>98~99</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第四章,第4章,第４章,100,101"
-        >
-          <a href="images/クレアーン8.png">
-            <img src="images/クレアーン8.png" alt="" />
-          </a>
-          <span>100~101</span>
-        </li>
-
-        <li
-          class="item"
-          data-tags="数学,関数,体系数学,第五章,第5章,第５章,134,135"
-        >
-          <a href="images/クレアーン25.png">
-            <img src="images/クレアーン25.png" alt="" />
-          </a>
-          <span>134~135</span>
-        </li>
-      </ul>
+    <div class="row">
+      <label for="q">自動検索</label>
+      <input id="q" type="search" placeholder="ここに入力して検索" autocomplete="off" />
+      <button id="clear" type="button">クリア</button>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        /* 画像リンクは自動で新タブ */
-        document.querySelectorAll("#items a").forEach((a) => {
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-        });
+    <p class="meta"><span id="count"></span></p>
 
-        /* 検索 */
-        const input = document.getElementById("q");
-        const clearBtn = document.getElementById("clear");
-        const list = document.getElementById("items");
-        const count = document.getElementById("count");
+    <ul id="items">
 
-        const items = Array.from(list.querySelectorAll("li")).map((li) => ({
-          el: li,
-          text: (
-            li.textContent + " " + (li.dataset.tags || "")
-          )
-            .normalize("NFKC")
-            .toLowerCase(),
-        }));
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,86,87">
+        <a href="images/クレアーン1.png">
+          <img src="images/クレアーン1.png" alt="">
+        </a>
+        <span>86~87</span>
+      </li>
 
-        function update() {
-          const q = input.value
-            .normalize("NFKC")
-            .trim()
-            .toLowerCase();
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,88,89">
+        <a href="images/クレアーン2.png">
+          <img src="images/クレアーン2.png" alt="">
+        </a>
+        <span>88~89</span>
+      </li>
 
-          let shown = 0;
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,90,91">
+        <a href="images/クレアーン2.png">
+          <img src="images/クレアーン3.png" alt="">
+        </a>
+        <span>90~91</span>
+      </li>
 
-          for (const item of items) {
-            const match = q === "" || item.text.includes(q);
-            item.el.hidden = !match;
-            if (match) shown++;
-          }
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,92,93">
+        <a href="images/クレアーン4.png" target="_blank">
+          <img src="images/クレアーン4.png" alt="">
+        </a>
+        <span>92~93</span>
+      </li>
 
-          count.textContent = `表示：${shown} / ${items.length}`;
-        }
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,94,95">
+        <a href="images/クレアーン5.png" target="_blank">
+          <img src="images/クレアーン5.png" alt="">
+        </a>
+        <span>94~95</span>
+      </li>
 
-        input.addEventListener("input", update);
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章96,97">
+        <a href="images/クレアーン6.png" target="_blank">
+          <img src="images/クレアーン6.png" alt="">
+        </a>
+        <span>96~97</span>
+      </li>
 
-        clearBtn.addEventListener("click", () => {
-          input.value = "";
-          input.focus();
-          update();
-        });
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,98,99">
+        <a href="images/クレアーン7.png" target="_blank">
+          <img src="images/クレアーン7.png" alt="">
+        </a>
+        <span>98~99</span>
+      </li>
 
-        update();
-      });
-    </script>
-  </body>
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,100,101">
+        <a href="images/クレアーン8.png" target="_blank">
+          <img src="images/クレアーン8.png" alt="">
+        </a>
+        <span>100~101</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,102,103">
+        <a href="images/クレアーン9.png" target="_blank">
+          <img src="images/クレアーン9.png" alt="">
+        </a>
+        <span>102~103</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,104,105">
+        <a href="images/クレアーン10.png" target="_blank">
+          <img src="images/クレアーン10.png" alt="">
+        </a>
+        <span>104~105</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,106,107">
+        <a href="images/クレアーン11.png" target="_blank">
+          <img src="images/クレアーン11.png" alt="">
+        </a>
+        <span>106~107</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章108,109,確認">
+        <a href="images/クレアーン12.png" target="_blank">
+          <img src="images/クレアーン12.png" alt="">
+        </a>
+        <span>108~109</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,110,111,演習">
+        <a href="images/クレアーン13.png" target="_blank">
+          <img src="images/クレアーン13.png" alt="">
+        </a>
+        <span>110~111</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,112,113">
+        <a href="images/クレアーン14.png" target="_blank">
+          <img src="images/クレアーン14.png" alt="">
+        </a>
+        <span>112~113</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,114,115">
+        <a href="images/クレアーン15.png" target="_blank">
+          <img src="images/クレアーン15.png" alt="">
+        </a>
+        <span>114~115</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,116,117">
+        <a href="images/クレアーン16.png" target="_blank">
+          <img src="images/クレアーン16.png" alt="">
+        </a>
+        <span>116~117</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,118,119">
+        <a href="images/クレアーン17.png" target="_blank">
+          <img src="images/クレアーン17.png" alt="">
+        </a>
+        <span>118~119</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,120,121,演習">
+        <a href="images/クレアーン18.png" target="_blank">
+          <img src="images/クレアーン18.png" alt="">
+        </a>
+        <span>120~121</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,122,123">
+        <a href="images/クレアーン19.png" target="_blank">
+          <img src="images/クレアーン19.png" alt="">
+        </a>
+        <span>122~123</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,124,125">
+        <a href="images/クレアーン20.png" target="_blank">
+          <img src="images/クレアーン20.png" alt="">
+        </a>
+        <span>124~125</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,126,127">
+        <a href="images/クレアーン21.png" target="_blank">
+          <img src="images/クレアーン21.png" alt="">
+        </a>
+        <span>126~127</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,128,129,確認">
+        <a href="images/クレアーン22.png" target="_blank">
+          <img src="images/クレアーン22.png" alt="">
+        </a>
+        <span>128~129</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,130,131,演習">
+        <a href="images/クレアーン23.png" target="_blank">
+          <img src="images/クレアーン23.png" alt="">
+        </a>
+        <span>130~131</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,132,133,演習">
+        <a href="images/クレアーン24.png" target="_blank">
+          <img src="images/クレアーン24.png" alt="">
+        </a>
+        <span>132~133</span>
+      </li>
+
+      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,134,135">
+        <a href="images/クレアーン25.png" target="_blank">
+          <img src="images/クレアーン25.png" alt="">
+        </a>
+        <span>134~135</span>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const input = document.getElementById("q");
+    const clearBtn = document.getElementById("clear");
+    const list = document.getElementById("items");
+    const count = document.getElementById("count");
+
+    const items = Array.from(list.querySelectorAll("li")).map(li => ({
+      el: li,
+      text: (
+        li.textContent + " " + (li.dataset.tags || "")
+      ).normalize("NFKC").toLowerCase()
+    }));
+
+    function update() {
+      const q = input.value.normalize("NFKC").trim().toLowerCase();
+      let shown = 0;
+
+      for (const item of items) {
+        const match = q === "" || item.text.includes(q);
+        item.el.hidden = !match;
+        if (match) shown++;
+      }
+
+      count.textContent = `表示：${shown} / ${items.length}`;
+    }
+
+    input.addEventListener("input", update);
+
+    clearBtn.addEventListener("click", () => {
+      input.value = "";
+      input.focus();
+      update();
+    });
+
+    update();
+  </script>
+
+</body>
 </html>
+
+
