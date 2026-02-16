@@ -30,7 +30,7 @@ body{
   padding:60px 24px;
 }
 
-/* 全体を縦並び */
+/* 全体ラッパー */
 .wrapper{
   width:100%;
   max-width:520px;
@@ -49,16 +49,28 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-h1{
-  margin:0 0 8px;
-  font-size:20px;
-  font-weight:700;
+/* 見出し */
+h1,h2{
+  margin-top:0;
+  text-align:center;
 }
 
+h1{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:20px;
+}
+
+/* パスワード */
 p.lead{
   margin:0 0 18px;
   color:var(--sub);
   font-size:14px;
+  text-align:center;
 }
 
 form{
@@ -73,7 +85,6 @@ input[type="password"]{
   border:1px solid var(--border);
   font-size:15px;
   outline:none;
-  transition:border-color .15s, box-shadow .15s;
 }
 
 input[type="password"]:focus{
@@ -90,7 +101,7 @@ input[type="password"]:focus{
   padding:10px 16px;
   border-radius:10px;
   background:var(--accent);
-  color:#ffffff;
+  color:#fff;
   font-weight:600;
   border:none;
   cursor:pointer;
@@ -107,16 +118,30 @@ input[type="password"]:focus{
 .message.error{ color:#dc2626; }
 .message.success{ color:#16a34a; }
 
-/* 禁止事項カード */
-.rules h2{
-  text-align:center;
-  margin-top:0;
-  margin-bottom:20px;
-  font-size:20px;
+/* 禁止事項 */
+.rules-content{
+  font-size:14px;
+  line-height:1.9;
+  color:#374151;
 }
 
-.rules p{
-  line-height:1.8;
+.rules-content p{
+  margin-bottom:18px;
+}
+
+.rules-list{
+  padding-left:20px;
+  margin-bottom:22px;
+}
+
+.rules-list li{
+  margin-bottom:10px;
+}
+
+.agreement{
+  margin-top:24px;
+  padding-top:16px;
+  border-top:1px solid #e5e7eb;
   font-weight:600;
   text-align:center;
 }
@@ -125,73 +150,61 @@ input[type="password"]:focus{
 
 <body>
 
-  <!-- 禁止事項カード -->
-<div class="card rules">
-  <h2>禁止事項</h2>
+<div class="wrapper">
 
-  <div class="rules-content">
+  <!-- 禁止事項カード（上） -->
+  <div class="card rules">
+    <h2>禁止事項</h2>
 
-    <p>
-      学校教育や個人利用の範囲においては、著作権法に基づき、
-      一定の条件のもとで著作物の複製が認められています。
-    </p>
+    <div class="rules-content">
+      <p>
+        学校教育や個人利用の範囲においては、著作権法に基づき、
+        一定の条件のもとで著作物の複製が認められています。
+      </p>
 
-    <p>
-      （参考：文化庁「著作物が自由に使える場合」）
-    </p>
-      
-    <p>
-      本団体の活動は営利目的ではなく、すでに正規に教材を所持している生徒に対する
-      教育支援を目的として、教材の一部をデータ化し活用するものです。
-      また、閲覧にはパスワード認証を設け、関係者以外がアクセスできないよう管理を行っています。
-      著作権法の趣旨を踏まえ、適切な範囲内での運用に努めています。
-    </p>
+      <p>（参考：文化庁「著作物が自由に使える場合」）</p>
 
-    <p>
-      本サイトをご利用の際は、以下の事項を必ずお守りください。
-    </p>
+      <p>
+        本団体の活動は営利目的ではなく、すでに正規に教材を所持している生徒に対する
+        教育支援を目的として、教材の一部をデータ化し活用するものです。
+        また、閲覧にはパスワード認証を設け、関係者以外がアクセスできないよう管理を行っています。
+      </p>
 
-    <ul class="rules-list">
-      <li>パスワードを第三者と共有しないこと</li>
-      <li>掲載資料（データ・画像・教材等）を第三者へ共有、転載、再配布しないこと</li>
-      <li>本サイトの内容を許可なく複製、公開、転用しないこと</li>
-      <li>本サイトの資料を営利目的で利用しないこと</li>
-      <li>SNSや外部サイトへ内容を投稿しないこと</li>
-      <li>不正アクセスや不正取得を行わないこと</li>
-      <li>利用資格のない者に閲覧させないこと</li>
-      <li>著作権者および関係者の権利を侵害する行為を行わないこと</li>
-      <li>本団体の許可なく内容を改変・編集しないこと</li>
-    </ul>
+      <p>本サイトをご利用の際は、以下の事項を必ずお守りください。</p>
 
-    <p>
-      本サイトは、著作権法その他の法令を尊重し、
-      教育支援を目的として適切な範囲内で運営しております。
-      円滑かつ継続的な運営のため、本規約の趣旨をご理解のうえ、
-      遵守およびご協力をお願いします。
-    </p>
+      <ul class="rules-list">
+        <li>パスワードを第三者と共有しないこと</li>
+        <li>掲載資料を第三者へ共有、転載、再配布しないこと</li>
+        <li>内容を許可なく複製、公開、転用しないこと</li>
+        <li>営利目的で利用しないこと</li>
+        <li>SNSや外部サイトへ投稿しないこと</li>
+        <li>不正アクセスや不正取得を行わないこと</li>
+        <li>利用資格のない者に閲覧させないこと</li>
+        <li>著作権者の権利を侵害する行為を行わないこと</li>
+        <li>許可なく改変・編集しないこと</li>
+      </ul>
 
-    <p class="agreement">
-      本サイトを利用した時点で、本規約に同意したものとみなします。
-    </p>
-
-  </div>
-  <div class="wrapper">
-  
-    <!-- パスワードカード -->
-    <div class="card">
-      <h1>この先はパスワードが必要です</h1>
-      <p class="lead">パスワードを入力してください。</p>
-  
-      <form id="pwForm" autocomplete="off" onsubmit="return false;">
-        <input id="pw" type="password" placeholder="パスワードを入力" required />
-        <div class="actions">
-          <button id="submitBtn" class="btn" type="submit">送信</button>
-          <div id="msg" class="message"></div>
-        </div>
-      </form>
+      <p class="agreement">
+        本サイトを利用した時点で、本規約に同意したものとみなします。
+      </p>
     </div>
-</div>
+  </div>
 
+  <!-- パスワードカード（下） -->
+  <div class="card">
+    <h1>この先はパスワードが必要です</h1>
+    <p class="lead">パスワードを入力してください。</p>
+
+    <form id="pwForm" autocomplete="off" onsubmit="return false;">
+      <input id="pw" type="password" placeholder="パスワードを入力" required />
+      <div class="actions">
+        <button id="submitBtn" class="btn" type="submit">送信</button>
+        <div id="msg" class="message"></div>
+      </div>
+    </form>
+  </div>
+
+</div>
 
 <script>
 (() => {
