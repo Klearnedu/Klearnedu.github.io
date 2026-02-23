@@ -1,247 +1,296 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>代表挨拶 | Klearn</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>代表挨拶 | Klearn</title>
 
-<style>
-:root{
-  --bg:#ffffff;
-  --card:#ffffff;
-  --accent:#2563eb;
-  --text:#111827;
-  --sub:#6b7280;
-  --border:#e5e7eb;
-}
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --accent: #2563eb;
+      --text: #111827;
+      --sub: #6b7280;
+      --border: #e5e7eb;
+    }
 
-*{box-sizing:border-box}
-html,body{height:100%}
+    body.dark {
+      --bg: #071026;
+      --card: #0f172a;
+      --text: #d4e0ff;
+      --sub: #94a3b8;
+      --border: #1e293b;
+      --accent: #4095ff;
+    }
 
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,
-  "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
+    * { box-sizing: border-box; }
 
-/* =========================
-   ヘッダー & サイドバー
-========================= */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto,
+        "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background .3s, color .3s;
+    }
 
-header{
-  padding:24px;
-}
+    /* ===== ヘッダー ===== */
 
-.logo-area{
-  position:relative;
-  display:inline-block;
-}
+    header {
+      padding: 24px;
+    }
 
-.logo{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  text-decoration:none;
-  color:var(--text);
-  font-weight:600;
-  font-size:16px;
-}
+    .logo-area {
+      position: relative;
+      display: inline-block;
+    }
 
-.logo img{
-  height:40px;
-  width:auto;
-  display:block;
-}
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 16px;
+    }
 
-.sidebar{
-  position:fixed;
-  top:0;
-  left:0;
-  height:100vh;
-  width:260px;
-  background:#f9fafb;
-  padding:120px 24px 24px;
-  box-shadow:2px 0 10px rgba(0,0,0,0.08);
-  transform:translateX(-100%);
-  transition:transform 0.3s ease;
-  z-index:1000;
-}
+    .logo img {
+      height: 40px;
+    }
 
-.logo-area:hover .sidebar{
-  transform:translateX(0);
-}
+    /* ===== サイドバー ===== */
 
-.sidebar ul{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 260px;
+      background: #f9fafb;
+      padding: 120px 24px 24px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease, background .3s;
+      display: flex;
+      flex-direction: column;
+    }
 
-.sidebar li{
-  margin-bottom:16px;
-}
+    body.dark .sidebar {
+      background: #1e293b;
+    }
 
-.sidebar a{
-  display:block;
-  font-size:18px;
-  text-decoration:none;
-  color:var(--text);
-  padding:8px 4px;
-  border-radius:8px;
-  transition:background .15s;
-}
+    .logo-area:hover .sidebar {
+      transform: translateX(0);
+    }
 
-.sidebar a:hover{
-  background:rgba(37,99,235,0.08);
-  color:var(--accent);
-}
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
 
-/* =========================
-   メインコンテンツ
-========================= */
+    .sidebar li {
+      margin-bottom: 16px;
+    }
 
-.wrapper{
-  max-width:1100px;
-  margin:60px auto 80px;
-  padding:0 20px;
-}
+    .sidebar a {
+      display: block;
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--text);
+      padding: 8px 4px;
+      border-radius: 8px;
+      transition: background .15s;
+    }
 
-.card{
-  background:var(--card);
-  border-radius:16px;
-  padding:48px;
-  border:1px solid var(--border);
-  box-shadow:0 12px 30px rgba(0,0,0,0.06);
-}
+    .sidebar a:hover {
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--accent);
+    }
 
-h1{
-  font-size:30px;
-  font-weight:700;
-  margin:0 0 32px;
-  line-height:1.4;
-  text-align:center;
-}
+    .theme-toggle {
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
 
-.content{
-  display:flex;
-  gap:40px;
-  align-items:flex-start;
-}
+    .theme-toggle button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
 
-.text{
-  flex:1.4;
-  font-size:16px;
-  line-height:1.9;
-}
+    /* ===== メイン ===== */
 
-.text p{
-  margin:0 0 20px;
-}
+    .wrapper {
+      max-width: 1100px;
+      margin: 60px auto 80px;
+      padding: 0 20px;
+    }
 
-.photo{
-  flex:1;
-}
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 48px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    }
 
-.photo img{
-  width:100%;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.12);
-}
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0 0 32px;
+      line-height: 1.4;
+      text-align: center;
+    }
 
-.highlight{
-  border-left:4px solid var(--accent);
-  padding-left:16px;
-  margin:24px 0;
-  font-weight:600;
-}
+    .content {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
 
-footer{
-  margin-top:40px;
-  font-size:14px;
-  color:var(--sub);
-  text-align:right;
-}
+    .text {
+      flex: 1.4;
+      font-size: 16px;
+      line-height: 1.9;
+    }
 
-/* =========================
-   スマホ対応
-========================= */
+    .text p {
+      margin: 0 0 20px;
+    }
 
-@media(max-width:900px){
-  .content{
-    flex-direction:column;
-  }
-  .card{
-    padding:28px;
-  }
-  h1{
-    font-size:22px;
-  }
-}
-</style>
+    .photo {
+      flex: 1;
+    }
+
+    .photo img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .highlight {
+      border-left: 4px solid var(--accent);
+      padding-left: 16px;
+      margin: 24px 0;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: var(--sub);
+      text-align: right;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        flex-direction: column;
+      }
+      .card {
+        padding: 28px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo-area">
-    <a href="index.html" class="logo">
-      <img src="logo.png" alt="Klearnロゴ">
-      <span>Klearn</span>
-    </a>
+  <header>
+    <div class="logo-area">
+      <a href="index.html" class="logo">
+        <img src="logo-light.png" id="siteLogo" alt="Klearnロゴ">
+        <span>Klearn</span>
+      </a>
 
-    <nav class="sidebar">
-      <ul>
-        <li><a href="home.html">ホーム</a></li>
-        <li><a href="NPO.html">このNPOについて</a></li>
-        <li><a href="index.html">パスワードを打つ</a></li>
-        <li><a href="books.html">教科書を検索する</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+      <nav class="sidebar">
+        <ul>
+          <li><a href="home.html">ホーム</a></li>
+          <li><a href="NPO.html">このNPOについて</a></li>
+          <li><a href="index.html">パスワードを打つ</a></li>
+          <li><a href="books.html">教科書を検索する</a></li>
+        </ul>
 
-<div class="wrapper">
-  <div class="card">
+        <div class="theme-toggle">
+          <button id="themeBtn">DARK MODE</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <h1>
-      会長の挨拶<br>
-      「いつでも、どこでも、誰でも学べる環境を作りたい」
-    </h1>
+  <div class="wrapper">
+    <div class="card">
 
-    <div class="content">
+      <h1>
+        会長の挨拶<br>
+        「いつでも、どこでも、誰でも学べる環境を作りたい」
+      </h1>
 
-      <div class="text">
-        <p>NPOクレアーンを運営しております磯と申します。私たちのNPOは学校を拠点に、先生方のサポートを受けながら活動に取り組んでいます。私たちのNPOは、勉強をより効率化してほしいというニーズのもとに生まれました。実際、多くの生徒は「教科書を忘れてしまい勉強ができない」「目次から探す時間が勿体無い」「webで見れた方が効率が良い」といったニーズを持っており、日常に欠かせない教科書に不満があることがわかります。そのようなニーズに私たちは注目し、「いつでも、どこでも、誰でも学べる環境を作りたい」という理念のもとに集まりました。</p>
-        <p>私たちの活動は主に教科書のデジタル化です。教科書の写真を撮り、独自のwebサイトに投稿しています。</p>
+      <div class="content">
 
-        <div class="highlight">
-          教科書のデジタル化にはどのような利点があるのか
+        <div class="text">
+          <p>NPOクレアーンを運営しております磯と申します。私たちのNPOは学校を拠点に、先生方のサポートを受けながら活動に取り組んでいます。私たちのNPOは、勉強をより効率化してほしいというニーズのもとに生まれました。</p>
+
+          <p>実際、多くの生徒は「教科書を忘れてしまい勉強ができない」「目次から探す時間が勿体無い」「webで見れた方が効率が良い」といったニーズを持っており、日常に欠かせない教科書に不満があることがわかります。そのようなニーズに私たちは注目し、「いつでも、どこでも、誰でも学べる環境を作りたい」という理念のもとに集まりました。</p>
+
+          <p>私たちの活動は主に教科書のデジタル化です。教科書の写真を撮り、独自のwebサイトに投稿しています。</p>
+
+          <div class="highlight">
+            教科書のデジタル化にはどのような利点があるのか
+          </div>
+
+          <p>教科書をデジタル化することの利点はたくさんあります。その中でも特に「手間の削減」「効率化」という点においては生徒に多くのメリットをもたらすでしょう。教科書をデジタル化すると、重い教科書を持ち歩く必要はなく、生徒はクロームブックのみを携帯することでいつでもどこでも勉強を行えます。また、体調が悪くなって学校を休んだときにも同様です。</p>
+
+          <p>学校にいる時もそうです。持ち歩く手間はもちろん、課題はほとんどがデジタルであるためデジタルとアナログを行き来する必要がなく、課題作成の効率化を図ることができます。これはより質の良い課題作成にも繋がります。このように、教科書のデジタル化は私たちの理念に沿って、学習環境を改善するきっかけになるのではないかと考えています。</p>
+
+          <div class="highlight">
+            これからの展望について
+          </div>
+
+          <p>NPO団体"Klearn"一同全員は、私たちの理念が達成されることを願って活動しています。私たちの活動で、デジタル化された教科書が、多くの生徒の学びを支えるツールとなり、より良い学習環境を作るきっかけとなるために努力する所存です。</p>
+
+          <footer>
+            NPO法人Klearn代表
+          </footer>
         </div>
 
-        <p>教科書をデジタル化することの利点はたくさんあります。その中でも特に「手間の削減」「効率化」という点においては生徒に多くのメリットをもたらすでしょう。教科書をデジタル化すると、重い教科書を持ち歩く必要はなく生徒はクロームブックのみを携帯することでいつでもどこでも勉強を行えます。また、体調が悪くなって学校を休んだときにも同様です。</p>
-        <p>学校にいる時もそうです。持ち歩く手間はもちろん、課題はほとんどがデジタルであるためデジタルとアナログを行き来する必要がなく、課題作成の効率化を図ることができます。これはより質の良い課題作成にも繋がります。このように、教科書のデジタル化は私たちの理念に沿って、学習環境を改善するきっかけになるのではないかと考えています。</p>
-
-        <div class="highlight">
-          これからの展望について
+        <div class="photo">
+          <img src="iso.png" alt="代表写真">
         </div>
 
-        <p>NPO団体"Klearn"一同全員は、私たちの理念が達成されることを願って活動しています。私たちの活動で、デジタル化された教科書が、多くの生徒の学びを支えるツールとなり、より良い学習環境を作るきっかけなるために努力する所存です。</p>
-        
-        <footer>
-          NPO法人Klearn代表
-        </footer>
-      </div>
-
-      <div class="photo">
-        <img src="iso.png" alt="代表写真">
       </div>
 
     </div>
-
   </div>
-</div>
+
+  <script>
+    const btn = document.getElementById("themeBtn");
+    const logo = document.getElementById("siteLogo");
+
+    btn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      if (document.body.classList.contains("dark")) {
+        btn.textContent = "LIGHT MODE";
+        logo.src = "logo-dark.png";
+      } else {
+        btn.textContent = "DARK MODE";
+        logo.src = "logo-light.png";
+      }
+    });
+  </script>
 
 </body>
 </html>
