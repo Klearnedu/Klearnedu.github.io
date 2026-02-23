@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>教科書検索</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>教科書検索</title>
 
-  <style>
+<style>
 @font-face {
   font-family: 'honoka';
   src: url('Honoka-Shin-Maru-Gothic_R.otf') format('opentype');
@@ -73,6 +73,8 @@ header{
   transform:translateX(-100%);
   transition:transform .3s ease, background .3s;
   z-index:1000;
+  display:flex;
+  flex-direction:column;
 }
 
 body.dark .sidebar{
@@ -81,6 +83,17 @@ body.dark .sidebar{
 
 .logo-area:hover .sidebar{
   transform:translateX(0);
+}
+
+.sidebar ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  flex:1;
+}
+
+.sidebar li{
+  margin-bottom:16px;
 }
 
 .sidebar a{
@@ -96,6 +109,33 @@ body.dark .sidebar{
 .sidebar a:hover{
   background:rgba(37,99,235,0.08);
   color:var(--accent);
+}
+
+/* テーマボタン */
+.theme-toggle{
+  padding-top:20px;
+  border-top:1px solid #e5e7eb;
+}
+
+body.dark .theme-toggle{
+  border-top:1px solid #334155;
+}
+
+.theme-toggle button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  background:var(--accent);
+  color:white;
+  font-weight:600;
+  transition:opacity .15s;
+}
+
+.theme-toggle button:hover{
+  opacity:0.85;
 }
 
 /* コンテナ */
@@ -166,7 +206,6 @@ button:hover{
   list-style:none;
 }
 
-/* カード */
 .item{
   background:var(--card);
   padding:16px;
@@ -190,230 +229,98 @@ button:hover{
 .item span{
   font-weight:600;
 }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo-area">
-      <a href="index.html" class="logo">
-        <img src="logo.png" alt="Klearnロゴ">
-        <span>Klearn</span>
-      </a>
+<header>
+<div class="logo-area">
+<a href="index.html" class="logo">
+<img src="logo.png" alt="Klearnロゴ">
+<span>Klearn</span>
+</a>
 
-      <nav class="sidebar">
-        <ul>
-          <li><a href="home.html">ホーム</a></li>
-          <li><a href="NPO.html">このNPOについて</a></li>
-          <li><a href="index.html">パスワードを打つ</a></li>
-          <li><a href="books.html">教科書を検索する</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<nav class="sidebar">
+<ul>
+<li><a href="home.html">ホーム</a></li>
+<li><a href="NPO.html">このNPOについて</a></li>
+<li><a href="index.html">パスワードを打つ</a></li>
+<li><a href="books.html">教科書を検索する</a></li>
+</ul>
 
-  <div class="container">
-    <h1>検索で画像を探す</h1>
+<div class="theme-toggle">
+<button id="themeBtn">DARK MODE</button>
+</div>
 
-    <div class="row">
-      <label for="q">自動検索</label>
-      <input id="q" type="search" placeholder="ここに入力して検索" autocomplete="off" />
-      <button id="clear" type="button">クリア</button>
-    </div>
+</nav>
+</div>
+</header>
 
-    <p class="meta"><span id="count"></span></p>
+<div class="container">
+<h1>検索で画像を探す</h1>
 
-    <ul id="items">
+<div class="row">
+<label for="q">自動検索</label>
+<input id="q" type="search" placeholder="ここに入力して検索" autocomplete="off" />
+<button id="clear" type="button">クリア</button>
+</div>
 
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,86,87">
-        <a href="images/クレアーン1.png">
-          <img src="images/クレアーン1.png" alt="">
-        </a>
-        <span>86~87</span>
-      </li>
+<p class="meta"><span id="count"></span></p>
 
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,88,89">
-        <a href="images/クレアーン2.png">
-          <img src="images/クレアーン2.png" alt="">
-        </a>
-        <span>88~89</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,90,91">
-        <a href="images/クレアーン2.png">
-          <img src="images/クレアーン3.png" alt="">
-        </a>
-        <span>90~91</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,92,93">
-        <a href="images/クレアーン4.png" target="_blank">
-          <img src="images/クレアーン4.png" alt="">
-        </a>
-        <span>92~93</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,94,95">
-        <a href="images/クレアーン5.png" target="_blank">
-          <img src="images/クレアーン5.png" alt="">
-        </a>
-        <span>94~95</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章96,97">
-        <a href="images/クレアーン6.png" target="_blank">
-          <img src="images/クレアーン6.png" alt="">
-        </a>
-        <span>96~97</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,98,99">
-        <a href="images/クレアーン7.png" target="_blank">
-          <img src="images/クレアーン7.png" alt="">
-        </a>
-        <span>98~99</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,100,101">
-        <a href="images/クレアーン8.png" target="_blank">
-          <img src="images/クレアーン8.png" alt="">
-        </a>
-        <span>100~101</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,102,103">
-        <a href="images/クレアーン9.png" target="_blank">
-          <img src="images/クレアーン9.png" alt="">
-        </a>
-        <span>102~103</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,104,105">
-        <a href="images/クレアーン10.png" target="_blank">
-          <img src="images/クレアーン10.png" alt="">
-        </a>
-        <span>104~105</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,106,107">
-        <a href="images/クレアーン11.png" target="_blank">
-          <img src="images/クレアーン11.png" alt="">
-        </a>
-        <span>106~107</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章108,109,確認">
-        <a href="images/クレアーン12.png" target="_blank">
-          <img src="images/クレアーン12.png" alt="">
-        </a>
-        <span>108~109</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第四章,第4章,第４章,110,111,演習">
-        <a href="images/クレアーン13.png" target="_blank">
-          <img src="images/クレアーン13.png" alt="">
-        </a>
-        <span>110~111</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,112,113">
-        <a href="images/クレアーン14.png" target="_blank">
-          <img src="images/クレアーン14.png" alt="">
-        </a>
-        <span>112~113</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,114,115">
-        <a href="images/クレアーン15.png" target="_blank">
-          <img src="images/クレアーン15.png" alt="">
-        </a>
-        <span>114~115</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,116,117">
-        <a href="images/クレアーン16.png" target="_blank">
-          <img src="images/クレアーン16.png" alt="">
-        </a>
-        <span>116~117</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,118,119">
-        <a href="images/クレアーン17.png" target="_blank">
-          <img src="images/クレアーン17.png" alt="">
-        </a>
-        <span>118~119</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,120,121,演習">
-        <a href="images/クレアーン18.png" target="_blank">
-          <img src="images/クレアーン18.png" alt="">
-        </a>
-        <span>120~121</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,122,123">
-        <a href="images/クレアーン19.png" target="_blank">
-          <img src="images/クレアーン19.png" alt="">
-        </a>
-        <span>122~123</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,124,125">
-        <a href="images/クレアーン20.png" target="_blank">
-          <img src="images/クレアーン20.png" alt="">
-        </a>
-        <span>124~125</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,126,127">
-        <a href="images/クレアーン21.png" target="_blank">
-          <img src="images/クレアーン21.png" alt="">
-        </a>
-        <span>126~127</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,128,129,確認">
-        <a href="images/クレアーン22.png" target="_blank">
-          <img src="images/クレアーン22.png" alt="">
-        </a>
-        <span>128~129</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,130,131,演習">
-        <a href="images/クレアーン23.png" target="_blank">
-          <img src="images/クレアーン23.png" alt="">
-        </a>
-        <span>130~131</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,132,133,演習">
-        <a href="images/クレアーン24.png" target="_blank">
-          <img src="images/クレアーン24.png" alt="">
-        </a>
-        <span>132~133</span>
-      </li>
-
-      <li class="item" data-tags="数学,関数,体系数学,第五章,第5章,第５章,134,135">
-        <a href="images/クレアーン25.png" target="_blank">
-          <img src="images/クレアーン25.png" alt="">
-        </a>
-        <span>134~135</span>
-      </li>
-    </ul>
-  </div>
+<ul id="items">
+<!-- ここは元のliそのままでOK -->
+</ul>
+</div>
 
 <script>
-const body = document.body;
+// テーマ切替
+const themeBtn = document.getElementById("themeBtn");
 
-document.addEventListener("keydown", (e)=>{
-  if(e.key === "d"){
-    body.classList.toggle("dark");
-  }
+themeBtn.addEventListener("click", () => {
+document.body.classList.toggle("dark");
+
+if(document.body.classList.contains("dark")){
+themeBtn.textContent = "LIGHT MODE";
+} else {
+themeBtn.textContent = "DARK MODE";
+}
 });
+
+// 検索機能
+const input = document.getElementById("q");
+const clearBtn = document.getElementById("clear");
+const list = document.getElementById("items");
+const count = document.getElementById("count");
+
+const items = Array.from(list.querySelectorAll("li")).map(li => ({
+el: li,
+text: (li.textContent + " " + (li.dataset.tags || "")).normalize("NFKC").toLowerCase()
+}));
+
+function update(){
+const q = input.value.normalize("NFKC").trim().toLowerCase();
+let shown = 0;
+
+for(const item of items){
+const match = q === "" || item.text.includes(q);
+item.el.hidden = !match;
+if(match) shown++;
+}
+
+count.textContent = `表示：${shown} / ${items.length}`;
+}
+
+input.addEventListener("input", update);
+
+clearBtn.addEventListener("click", ()=>{
+input.value="";
+input.focus();
+update();
+});
+
+update();
 </script>
 
 </body>
 </html>
-
-
