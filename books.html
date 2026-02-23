@@ -552,50 +552,21 @@
   </div>
 
   <script>
-    const themeBtn = document.getElementById("themeBtn");
-
-    themeBtn.addEventListener("click", () => {
+    const btn = document.getElementById("themeBtn");
+    const logo = document.getElementById("siteLogo");
+    
+    btn.addEventListener("click", () => {
       document.body.classList.toggle("dark");
-      themeBtn.textContent =
-        document.body.classList.contains("dark")
-          ? "LIGHT MODE"
-          : "DARK MODE";
-    });
-
-    const input = document.getElementById("q");
-    const clearBtn = document.getElementById("clear");
-    const list = document.getElementById("items");
-    const count = document.getElementById("count");
-
-    const items = Array.from(list.querySelectorAll("li")).map(li => ({
-      el: li,
-      text: (li.textContent + " " + (li.dataset.tags || ""))
-        .normalize("NFKC")
-        .toLowerCase()
-    }));
-
-    function update() {
-      const q = input.value.normalize("NFKC").trim().toLowerCase();
-      let shown = 0;
-
-      for (const item of items) {
-        const match = q === "" || item.text.includes(q);
-        item.el.hidden = !match;
-        if (match) shown++;
+    
+      if(document.body.classList.contains("dark")){
+        btn.textContent = "LIGHT MODE";
+        logo.src = "logo-dark.png";
+      } else {
+        btn.textContent = "DARK MODE";
+        logo.src = "logo-light.png";
       }
-
-      count.textContent = `表示：${shown} / ${items.length}`;
-    }
-
-    input.addEventListener("input", update);
-
-    clearBtn.addEventListener("click", () => {
-      input.value = "";
-      input.focus();
-      update();
     });
 
-    update();
   </script>
 
 </body>
