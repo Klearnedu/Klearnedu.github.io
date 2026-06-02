@@ -6,10 +6,9 @@
 <title>Klearn</title>
 
 <style>
-
 @font-face {
-  font-family: 'honoka'; /* フォント名*/
-  src: url('Honoka-Shin-Maru-Gothic_R.otf') format('opentype'); /* ファイル名 */
+  font-family: 'honoka';
+  src: url('Honoka-Shin-Maru-Gothic_R.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,7 +19,9 @@
   --text:#111827;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -147,6 +148,7 @@ body.dark .theme-toggle{
 /* メイン */
 main{
   padding-top:80px;
+  padding-bottom:80px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -204,6 +206,59 @@ a.menu-link{
 a.menu-link:hover{
   background:rgba(37,99,235,0.08);
 }
+
+/* 情報共有ページへのリンクボックス */
+.share-box{
+  margin-top:40px;
+  padding:18px 32px;
+  border:2px solid var(--accent);
+  border-radius:18px;
+  background:rgba(37,99,235,0.06);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:background .15s, transform .15s;
+}
+
+.share-box:hover{
+  background:rgba(37,99,235,0.12);
+  transform:translateY(-2px);
+}
+
+.share-box a{
+  display:block;
+  font-size:22px;
+  font-weight:800;
+  text-decoration:none;
+  color:var(--accent);
+}
+
+/* スマホ対応 */
+@media (max-width:600px){
+  h1{
+    font-size:48px;
+  }
+
+  .k{
+    font-size:70px;
+  }
+
+  .philosophy{
+    font-size:17px;
+    padding:0 20px;
+  }
+
+  a.menu-link{
+    font-size:22px;
+  }
+
+  .share-box{
+    width:calc(100% - 40px);
+    padding:16px 20px;
+  }
+
+  .share-box a{
+    font-size:20px;
+  }
+}
 </style>
 </head>
 
@@ -220,8 +275,8 @@ a.menu-link:hover{
       <ul>
         <li><a href="home.html">ホーム</a></li>
         <li><a href="NPO.html">このNPOについて</a></li>
-        <li><a href="index.html">パスワードを打つ</a></li>
-        <li><a href="books.html">教科書を検索する</a></li>
+        <li><a href="index.html">パスワード画面に戻る</a></li>
+        <li><a href="aaaaaaaaaaaaaaaaaaaaaaaaa.html">ここにテキストを挿入ここにテキストを挿入ここにテキストを挿入</a></li>
       </ul>
 
       <div class="theme-toggle">
@@ -237,27 +292,31 @@ a.menu-link:hover{
   </h1>
 
   <p class="philosophy">
-    学びをもっと自由に、もっと直感的に。<br>
-    Klearnは、必要な知識へ最短距離でたどり着ける環境をつくります。
+    学びをもっと自由に、仲間と共に。<br>
+    Klearnは、あなたのアイディアを世界に届けます。
   </p>
 
   <ul>
     <li>
-      <a class="menu-link" href="tasks.html">
-        ・課題一覧（近日公開）
+      <a class="menu-link" href="manage.html">
+        ・管理履歴
       </a>
     </li>
     <li>
-      <a class="menu-link" href="books.html">
-        ・教科書リストの検索
+      <a class="menu-link" href="thisnpo.html">
+        ・このNPOについて
       </a>
     </li>
     <li>
-      <a class="menu-link" href="tasks.html">
-        ・文字認識機能（近日公開）
+      <a class="menu-link" href="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.html">
+        ・ここにテキストを挿入ここにテキストを挿入ここにテキスト
       </a>
     </li>
   </ul>
+
+  <div class="share-box">
+    <a href="shareid.html">情報共有ページへ飛ぶ</a>
+  </div>
 </main>
 
 <script>
