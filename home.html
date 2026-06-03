@@ -209,6 +209,7 @@ a.menu-link:hover{
 
 /* 情報共有ページへのリンクボックス */
 .share-box{
+  display:block;
   margin-top:40px;
   padding:26px 48px;
   border:2px solid var(--accent);
@@ -216,19 +217,16 @@ a.menu-link:hover{
   background:rgba(37,99,235,0.06);
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   transition:background .15s, transform .15s;
+
+  font-size:28px;
+  font-weight:800;
+  text-decoration:none;
+  color:var(--accent);
 }
 
 .share-box:hover{
   background:rgba(37,99,235,0.12);
   transform:translateY(-2px);
-}
-
-.share-box a{
-  display:block;
-  font-size:28px;
-  font-weight:800;
-  text-decoration:none;
-  color:var(--accent);
 }
   
 /* スマホ対応 */
@@ -314,9 +312,9 @@ a.menu-link:hover{
     </li>
   </ul>
 
-  <div class="share-box">
-    <a href="shareid.html">情報共有ページへ飛ぶ</a>
-  </div>
+  <a class="share-box" href="shareid.html">
+    情報共有ページへ飛ぶ
+  </a>
 </main>
 
 <script>
