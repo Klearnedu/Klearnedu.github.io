@@ -213,6 +213,9 @@ input[type="password"]:focus{
   const PASSWORD = 'klearn13';
   const redirectUrl = 'https://klearnedu.vercel.app/home.html';
 
+  const VOCALOID_PASSWORD = 'vocaloid';
+  const vocaloidUrl = 'https://klearnedu.vercel.app/vocarank.html';
+
   const input = document.getElementById('pw');
   const msg = document.getElementById('msg');
   const btn = document.getElementById('submitBtn');
@@ -228,23 +231,32 @@ input[type="password"]:focus{
     input.focus();
   }
 
-  function correct(){
+  function correct(url){
     showMessage('認証に成功しました。移動します…', true);
     setTimeout(() => {
-      location.href = redirectUrl;
+      location.href = url;
     }, 500);
   }
 
   function tryPassword(){
     const val = input.value.trim();
+
     if(!val){
       showMessage('パスワードを入力してください');
       return;
     }
-    val === PASSWORD ? correct() : wrong();
+
+    if(val === PASSWORD){
+      correct(redirectUrl);
+    } else if(val === VOCALOID_PASSWORD){
+      correct(vocaloidUrl);
+    } else {
+      wrong();
+    }
   }
 
   btn.addEventListener('click', tryPassword);
+
   input.addEventListener('keydown', e => {
     if(e.key === 'Enter') tryPassword();
   });
